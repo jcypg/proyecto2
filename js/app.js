@@ -1,8 +1,11 @@
+import Egreso from './Egreso.js'
+
+
 let egresos = {
-    Renta: 900,
-    Ropa: 400,
-    Luz: 300,
-    Agua: 500,
+    new Egreso('Renta', 900, 0),
+    new Egreso('Ropa', 400, 0),
+    new Egreso('Luz', 300, 0),
+    new Egreso('Agua', 500, 0),
 }
 
 let ingresos = {
@@ -14,20 +17,26 @@ let ingresos = {
 const cargarCabecero = () => {
     let presupuesto = totalIngresos() - totalEgresos()
     let porcentajeEgreso = (totalIngresos() - totalEgresos()) / totalIngresos()
+
+    console.log('presupuesto', formatoMoneda(presupuesto));
+    console.log('porcentajeEgreso', formatoPorcentaje(porcentajeEgreso.toFixed(2)));
 }
 
 const totalIngresos = (ingresos) => {
     let total_ingresos = 0
-    for (const ingreso of ingresos) {
-        totalIngresos += ingreso
+    for (const key in ingresos) {
+        const value = ingresos[key]
+        total = total + value
     }
-    return total_ingresos
+    return total
 }
 
 const totalEgresos = (egresos) => {
-    let totalEgreso = 0
+    let totalEgresos = 0
     for (const egreso of egresos) {
         totalEgresos += egreso
     }
     return totalEgreso;
 }
+
+let egreso1 = new Egreso
