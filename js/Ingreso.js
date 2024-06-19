@@ -1,13 +1,15 @@
-class Ingreso extends Dato {
-    static contadorIngresos = 0
+import Dato from './Dato.js'
 
-    constructor(descripcion, valor){
+
+export default class Ingreso extends Dato {
+    // static contadorIngresos = 0
+
+    constructor(descripcion, valor, id){
         super(descripcion, valor)
-        this._id = contadorIngresos +1
+        this._id = id
     }
 
     getId(){
-        return
+        return this._id
     }
-
 }
