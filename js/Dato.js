@@ -6,7 +6,7 @@ export default class Dato {
 setDescripcion(nuevaDescripcion){
     this._descripcion = nuevaDescripcion
 }
-getDescripicion (){
+getDescripcion (){
     return this._descripcion = nuevaDescripcion
 }
 

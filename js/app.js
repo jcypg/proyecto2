@@ -55,7 +55,7 @@ const htmlEgreso = (index, descripcion, valor, porcentaje) => {
 
 const mostrarIngresos = () => {
     let html = ""
-    ingresos.mao((ingreso, index) => {
+    ingresos.map((ingreso, index) => {
         html += htmlIngreso(index, ingreso.getDescripcion(), ingreso.getValor())
 })
 document.getElementById('lista-ingresos').innerHTML = html
@@ -64,8 +64,8 @@ document.getElementById('lista-ingresos').innerHTML = html
 const mostrarEgresos = () => {
     let html = ""
     egresos.map((egreso, index) => {
-        html += htmlEgreso(index, egreso.getDescripcion(), egreso.getValor(), 3%)
-     })
+        html += htmlEgreso(index, egreso.getDescripcion(), egreso.getValor(), "3%")
+    })
      document.getElementById('lista-egresos').innerHTML = html
 }
 
@@ -81,7 +81,7 @@ const cargarCabecero = () => {
 }
 
 const totalIngresos = (ingresos) => {
-    let total_ingresos = 0
+    let total = 0
     for (const key in ingresos) {
         const value = ingresos[key]
         total = total + value
@@ -90,11 +90,12 @@ const totalIngresos = (ingresos) => {
 }
 
 const totalEgresos = (egresos) => {
-    let totalEgresos = 0
-    for (const egreso of egresos) {
-        totalEgresos += egreso
+    let total = 0
+    for (const key in egresos) {
+        const value = egresos[key]
+        total = total + value
     }
-    return totalEgreso;
+    return total
 }
 
 const formatoMoneda = (valor) => `$${valor.toLocaleString()}`
