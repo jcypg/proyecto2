@@ -1,19 +1,22 @@
-export default class Dato {
+class Dato {
     constructor(descripcion, valor){
-        this._descripcion = descripcion
-        this._valor = valor
+        this._descripcion = descripcion;
+        this._valor = valor;
     }
-setDescripcion(nuevaDescripcion){
-    this._descripcion = nuevaDescripcion
-}
-getDescripcion (){
-    return this._descripcion = nuevaDescripcion
+
+get descripcion (){
+    return this._descripcion
 }
 
-setValor(nuevoValor){
-    this._valor = nuevoValor
+set descripcion(descripcion){
+    this._descripcion = descripcion
 }
-getValor(){
+
+get valor(){
     return this._valor
+}
+
+set valor(valor){
+    this._valor = valor
 }
 }
