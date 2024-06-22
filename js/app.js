@@ -42,14 +42,14 @@ const cargarCabecero = () => {
 
     document.getElementById('presupuesto').innerHTML = formatoMoneda(presupuesto);
     document.getElementById('porcentaje').innerHTML = formatoPorcentaje(porcentajeEgreso);
-    document.getElementById('ingresos').innerHTML = formatoMoneda(totalIngresos);
-    document.getElementById('egresos').innerHTML = formatoMoneda(totalEgresos);
-}
+    document.getElementById('ingresos').innerHTML = formatoMoneda(totalIngresos());
+    document.getElementById('egresos').innerHTML = formatoMoneda(totalEgresos());
+};
 
 const formatoMoneda = (valor) => {
     return valor.toLocaleString('es-MX', { style: 'currency', currency: 'MXN', minimumFractionDigits: 2 });
 };
-    
+
 const formatoPorcentaje = (valor) => {
     return valor.toLocaleString('es-MX', { style: 'percent', minimumFractionDigits: 2 });
 };
@@ -59,28 +59,30 @@ const cargarIngresos = () => {
     for (let ingreso of ingresos) {
         ingresosHTML += crearIngresoHTML(ingreso);
     }
+    document.getElementById('lista-ingresos').innerHTML = ingresosHTML;
 };
 
 const crearIngresoHTML = (ingreso) => {
     return `
-    <div class="elemento limpiarEstilos">
-    <div class="elemento_descripcion">${ingreso.descripcion}</div>
-    <div class="derecha limpiarEstilos">
-    <div clsss="elemento_valor">${formatoMoneda(ingreso.valor)}</div>
-    <div class="elemento_eliminar">
-    <button class="elemento_eliminar_btn" onclick="eliminarIngreso(${ingreso.id})">
-    <ion-icon name="close-circle-outline"></ion-icon>
-    </button>
-    </div>
-    </div>
-    </div>`
-}
+        <div class="elemento limpiarEstilos">
+            <div class="elemento_descripcion">${ingreso.descripcion}</div>
+            <div class="derecha limpiarEstilos">
+                <div class="elemento_valor">${formatoMoneda(ingreso.valor)}</div>
+                <div class="elemento_eliminar">
+                    <button class="elemento_eliminar_btn" onclick="eliminarIngreso(${ingreso.id})">
+                        <ion-icon name="close-circle-outline"></ion-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+};
 
 const eliminarIngreso = (id) => {
-    let indiceEliminar = ingreso.findIndex(ingreso => ingreso.id === id);
+    let indiceEliminar = ingresos.findIndex(ingreso => ingreso.id === id);
     ingresos.splice(indiceEliminar, 1);
     cargarCabecero();
-    cargarCabecero();
+    cargarIngresos();
 };
 
 const cargarEgresos = () => {
@@ -93,26 +95,26 @@ const cargarEgresos = () => {
 
 const crearEgresoHTML = (egreso) => {
     return `
-    <div class="elemento limpiarEstilos">
-    <div class="elemento_descripcion">${egreso.descripcion}</div>
-    <div class="derecha limpiarEstilos">
-    <div class="elemento_valor">${formatoMoneda(egreso.valor)}</div>
-    <div class="elemento_porcentaje">${formatoPorcentaje(egreso.valor / totalEgresos())}</div>
-    <div class="elemento_eliminar">
-    <button class="elemento_eliminar_btn" onclick="eliminarEgreso(${egreso.id})">
-    <ion-icon name="close-circle-outline"></ion-icon>
-    </button>
-    </div>
-    </div>
-    </div>
+        <div class="elemento limpiarEstilos">
+            <div class="elemento_descripcion">${egreso.descripcion}</div>
+            <div class="derecha limpiarEstilos">
+                <div class="elemento_valor">${formatoMoneda(egreso.valor)}</div>
+                <div class="elemento_porcentaje">${formatoPorcentaje(egreso.valor / totalEgresos())}</div>
+                <div class="elemento_eliminar">
+                    <button class="elemento_eliminar_btn" onclick="eliminarEgreso(${egreso.id})">
+                        <ion-icon name="close-circle-outline"></ion-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
     `;
 };
 
 const eliminarEgreso = (id) => {
-    let indiceEliminar = egreso.findIndex(egreso => egreso.id === id);
+    let indiceEliminar = egresos.findIndex(egreso => egreso.id === id);
     egresos.splice(indiceEliminar, 1);
     cargarCabecero();
-    cargarCabecero();
+    cargarEgresos();
 };
 
 export const agregarDato = () => {
@@ -125,14 +127,15 @@ export const agregarDato = () => {
         if (tipo === 'ingreso') {
             ingresos.push(new Ingreso(descripcion, valor));
             cargarCabecero();
-            cargarCabecero();
-        }else if (tipo === 'egreso'); {
+            cargarIngresos();
+        } else if (tipo === 'egreso') {
             egresos.push(new Egreso(descripcion, valor));
             cargarCabecero();
-            cargarCabecero();
+            cargarEgresos();
         }
     }
 };
-
 window.cargarApp = cargarApp;
 window.agregarDato = agregarDato;
+window.eliminarIngreso = eliminarIngreso;
+window.eliminarEgreso = eliminarEgreso;
