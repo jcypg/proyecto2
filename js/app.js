@@ -69,7 +69,7 @@ const crearIngresoHTML = (ingreso) => {
             <div class="derecha limpiarEstilos">
                 <div class="elemento_valor">${formatoMoneda(ingreso.valor)}</div>
                 <div class="elemento_eliminar">
-                    <button class="elemento_eliminar_btn" onclick="eliminarIngreso(${ingreso.id})">
+                    <button class="elemento_eliminar--btn" onclick="eliminarIngreso(${ingreso.id})">
                         <ion-icon name="close-circle-outline"></ion-icon>
                     </button>
                 </div>
@@ -101,7 +101,7 @@ const crearEgresoHTML = (egreso) => {
                 <div class="elemento_valor">${formatoMoneda(egreso.valor)}</div>
                 <div class="elemento_porcentaje">${formatoPorcentaje(egreso.valor / totalEgresos())}</div>
                 <div class="elemento_eliminar">
-                    <button class="elemento_eliminar_btn" onclick="eliminarEgreso(${egreso.id})">
+                    <button class="elemento_eliminar--btn" onclick="eliminarEgreso(${egreso.id})">
                         <ion-icon name="close-circle-outline"></ion-icon>
                     </button>
                 </div>
